@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <span style="font-size: 3rem;">🚑</span>
+                    <h2 class="fw-bold mt-2">MediPlan Login</h2>
+                    <p class="text-muted">Bitte einloggen um fortzufahren</p>
+                </div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endwith %}
+
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Benutzername</label>
+                        <input type="text" name="username" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Passwort</label>
+                        <input type="password" name="passwort" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-danger w-100">Einloggen</button>
+                </form>
+                <p class="text-center mt-3 text-muted">
+                    Noch kein Konto? <a href="/register" class="text-danger">Registrieren</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

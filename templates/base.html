@@ -11,6 +11,12 @@
 <nav class="navbar navbar-dark bg-danger mb-4">
     <div class="container">
         <a class="navbar-brand" href="/">🚑 MediPlan</a>
+        {% if session.username %}
+        <div class="d-flex align-items-center gap-3">
+            <span class="text-white opacity-75">👤 {{ session.username }}</span>
+            <a href="/logout" class="btn btn-outline-light btn-sm">Ausloggen</a>
+        </div>
+        {% endif %}
     </div>
 </nav>
 <div class="container">

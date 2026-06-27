@@ -1,52 +1,76 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h1>{{ patient['name'] }}</h1>
-        <p class="text-muted">geb. {{ patient['geburtsdatum'] }}</p>
-        {% if patient['allergien'] %}
-        <span class="badge bg-warning text-dark">⚠️ Allergie: {{ patient['allergien'] }}</span>
-        {% endif %}
-    </div>
-    <div>
-        <a href="/patient/{{ patient['id'] }}/qr" class="btn btn-outline-danger me-2">QR-Code</a>
-        <a href="/patient/{{ patient['id'] }}/medikament/neu" class="btn btn-danger">+ Medikament</a>
+
+<!-- Patient Header -->
+<div class="p-4 mb-4 rounded-4" style="background: linear-gradient(135deg, #c0392b, #e74c3c); color: white;">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="fw-bold mb-1">👤 {{ patient['name'] }}</h1>
+            <p class="mb-1 opacity-75">📅 geboren am {{ patient['geburtsdatum'] }}</p>
+            {% if patient['allergien'] %}
+            <div class="mt-2">
+                <span class="badge bg-warning text-dark fs-6">⚠️ Allergie: {{ patient['allergien'] }}</span>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="/patient/{{ patient['id'] }}/qr" class="btn btn-light me-2">📱 QR-Code</a>
+            <a href="/patient/{{ patient['id'] }}/medikament/neu" class="btn btn-warning">+ Medikament</a>
+        </div>
     </div>
 </div>
 
-<h4 class="mb-3">Medikamentenplan</h4>
+<!-- Medikamentenplan -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body p-4">
+        <h4 class="fw-bold mb-4">💊 Medikamentenplan
+            <span class="badge bg-danger ms-2">{{ medikamente|length }} Medikament(e)</span>
+        </h4>
 
-{% if medikamente %}
-<table class="table table-bordered">
-    <thead class="table-danger">
-        <tr>
-            <th>Medikament</th>
-            <th>Dosierung</th>
-            <th>Uhrzeit</th>
-            <th>Indikation / Diagnose</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for med in medikamente %}
-        <tr>
-            <td>{{ med['name'] }}</td>
-            <td>{{ med['dosierung'] }}</td>
-            <td>{{ med['uhrzeit'] }}</td>
-            <td>{{ med['indikation'] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<p class="text-muted">Noch keine Medikamente eingetragen.</p>
-{% endif %}
+        {% if medikamente %}
+        <div class="row">
+            {% for med in medikamente %}
+            <div class="col-md-6 mb-3">
+                <div class="card border-start border-danger border-3 shadow-sm">
+                    <div class="card-body p-3">
+                        <h5 class="fw-bold text-danger mb-1">💊 {{ med['name'] }}</h5>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <small class="text-muted">Dosierung</small>
+                                <p class="mb-1 fw-bold">{{ med['dosierung'] }}</p>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted">Uhrzeit</small>
+                                <p class="mb-1 fw-bold">🕐 {{ med['uhrzeit'] }}</p>
+                            </div>
+                        </div>
+                        <div class="mt-1">
+                            <small class="text-muted">Indikation / Diagnose</small>
+                            <p class="mb-0">🏥 {{ med['indikation'] }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-4">
+            <span style="font-size: 3rem;">💊</span>
+            <p class="text-muted mt-2">Noch keine Medikamente eingetragen.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
 
-<a href="/" class="btn btn-secondary mt-3">← Zurück</a>
-<form method="POST" action="/patient/{{ patient['id'] }}/loeschen" style="display:inline;">
-    <button type="submit" class="btn btn-outline-danger mt-3"
-        onclick="return confirm('Patient wirklich löschen?')">
-        🗑️ Patient löschen
-    </button>
-</form>
+<!-- Buttons unten -->
+<div class="d-flex gap-2">
+    <a href="/" class="btn btn-secondary">← Zurück</a>
+    <form method="POST" action="/patient/{{ patient['id'] }}/loeschen" style="display:inline;">
+        <button type="submit" class="btn btn-outline-danger"
+            onclick="return confirm('Patient wirklich löschen?')">
+            🗑️ Patient löschen
+        </button>
+    </form>
+</div>
 {% endblock %}

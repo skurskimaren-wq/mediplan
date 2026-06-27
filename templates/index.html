@@ -1,8 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Patienten</h1>
+
+<!-- Hero Banner -->
+<div class="p-5 mb-4 rounded-4" style="background: linear-gradient(135deg, #c0392b, #e74c3c); color: white;">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="display-5 fw-bold">🚑 Digitaler Medikamentenplan</h1>
+            <p class="lead mb-3">Schnelle Übersicht für den Rettungsdienst — Medikamente, Dosierungen und Diagnosen immer griffbereit.</p>
+            <p class="mb-0 opacity-75">📍 QR-Code ausdrucken → am Kühlschrank befestigen → im Notfall sofort scannen</p>
+        </div>
+        <div class="col-md-4 text-center d-none d-md-block">
+            <span style="font-size: 8rem;">💊</span>
+        </div>
+    </div>
+</div>
+
+<!-- Info Karten -->
+<div class="row mb-4">
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div style="font-size: 2.5rem;">👤</div>
+                <h5 class="mt-2">Patient anlegen</h5>
+                <p class="text-muted small">Name, Geburtsdatum und Allergien eintragen</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div style="font-size: 2.5rem;">💉</div>
+                <h5 class="mt-2">Medikamente pflegen</h5>
+                <p class="text-muted small">Medikament, Dosierung, Uhrzeit und Diagnose hinterlegen</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div style="font-size: 2.5rem;">📱</div>
+                <h5 class="mt-2">QR-Code drucken</h5>
+                <p class="text-muted small">QR-Code ausdrucken und gut sichtbar aufhängen</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Patienten Liste -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold mb-0">👥 Patienten <span class="badge bg-danger ms-2">{{ patienten|length }}</span></h4>
     <a href="/patient/neu" class="btn btn-danger">+ Neuer Patient</a>
 </div>
 
@@ -10,20 +57,30 @@
 <div class="row">
     {% for patient in patienten %}
     <div class="col-md-4 mb-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{ patient['name'] }}</h5>
-                <p class="card-text text-muted">geb. {{ patient['geburtsdatum'] }}</p>
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center mb-2">
+                    <span style="font-size: 2rem;">👤</span>
+                    <div class="ms-3">
+                        <h5 class="mb-0 fw-bold">{{ patient['name'] }}</h5>
+                        <p class="text-muted small mb-0">geb. {{ patient['geburtsdatum'] }}</p>
+                    </div>
+                </div>
                 {% if patient['allergien'] %}
-                <p class="card-text"><span class="badge bg-warning text-dark">⚠️ {{ patient['allergien'] }}</span></p>
+                <div class="alert alert-warning py-1 px-2 mb-2" style="font-size: 0.85rem;">
+                    ⚠️ <strong>Allergie:</strong> {{ patient['allergien'] }}
+                </div>
                 {% endif %}
-                <a href="/patient/{{ patient['id'] }}" class="btn btn-outline-danger btn-sm">Mediplan ansehen</a>
+                <a href="/patient/{{ patient['id'] }}" class="btn btn-danger btn-sm w-100 mt-2">Mediplan ansehen →</a>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
 {% else %}
-<p class="text-muted">Noch keine Patienten angelegt.</p>
+<div class="text-center py-5">
+    <span style="font-size: 4rem;">📋</span>
+    <p class="text-muted mt-3">Noch keine Patienten angelegt.<br>Klick auf "+ Neuer Patient" um zu starten!</p>
+</div>
 {% endif %}
 {% endblock %}
