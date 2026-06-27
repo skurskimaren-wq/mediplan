@@ -70,7 +70,9 @@ def logout():
 @login_required
 def patient_neu():
     if request.method == 'POST':
-        name = request.form['name']
+        vorname = request.form['vorname']
+        nachname = request.form['nachname']
+        name = vorname + ' ' + nachname
         geburtsdatum = request.form['geburtsdatum']
         allergien = request.form['allergien']
         conn = get_connection()

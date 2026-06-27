@@ -42,3 +42,16 @@ h1 {
     padding: 6px 10px;
     border-radius: 8px;
 }
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #drucken, #drucken * {
+        visibility: visible;
+    }
+    #drucken {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
