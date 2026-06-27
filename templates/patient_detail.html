@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1>{{ patient['name'] }}</h1>
+        <p class="text-muted">geb. {{ patient['geburtsdatum'] }}</p>
+        {% if patient['allergien'] %}
+        <span class="badge bg-warning text-dark">⚠️ Allergie: {{ patient['allergien'] }}</span>
+        {% endif %}
+    </div>
+    <div>
+        <a href="/patient/{{ patient['id'] }}/qr" class="btn btn-outline-danger me-2">QR-Code</a>
+        <a href="/patient/{{ patient['id'] }}/medikament/neu" class="btn btn-danger">+ Medikament</a>
+    </div>
+</div>
+
+<h4 class="mb-3">Medikamentenplan</h4>
+
+{% if medikamente %}
+<table class="table table-bordered">
+    <thead class="table-danger">
+        <tr>
+            <th>Medikament</th>
+            <th>Dosierung</th>
+            <th>Uhrzeit</th>
+            <th>Indikation / Diagnose</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for med in medikamente %}
+        <tr>
+            <td>{{ med['name'] }}</td>
+            <td>{{ med['dosierung'] }}</td>
+            <td>{{ med['uhrzeit'] }}</td>
+            <td>{{ med['indikation'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="text-muted">Noch keine Medikamente eingetragen.</p>
+{% endif %}
+
+<a href="/" class="btn btn-secondary mt-3">← Zurück</a>
+<form method="POST" action="/patient/{{ patient['id'] }}/loeschen" style="display:inline;">
+    <button type="submit" class="btn btn-outline-danger mt-3"
+        onclick="return confirm('Patient wirklich löschen?')">
+        🗑️ Patient löschen
+    </button>
+</form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Patienten</h1>
+    <a href="/patient/neu" class="btn btn-danger">+ Neuer Patient</a>
+</div>
+
+{% if patienten %}
+<div class="row">
+    {% for patient in patienten %}
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ patient['name'] }}</h5>
+                <p class="card-text text-muted">geb. {{ patient['geburtsdatum'] }}</p>
+                {% if patient['allergien'] %}
+                <p class="card-text"><span class="badge bg-warning text-dark">⚠️ {{ patient['allergien'] }}</span></p>
+                {% endif %}
+                <a href="/patient/{{ patient['id'] }}" class="btn btn-outline-danger btn-sm">Mediplan ansehen</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-muted">Noch keine Patienten angelegt.</p>
+{% endif %}
+{% endblock %}

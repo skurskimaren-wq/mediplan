@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-4">Medikament hinzufügen</h1>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Medikament</label>
+                <input type="text" name="name" class="form-control" placeholder="z.B. Metoprolol" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Dosierung</label>
+                <input type="text" name="dosierung" class="form-control" placeholder="z.B. 50mg" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Uhrzeit</label>
+                <input type="text" name="uhrzeit" class="form-control" placeholder="z.B. 08:00 und 20:00" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Indikation / Diagnose</label>
+                <input type="text" name="indikation" class="form-control" placeholder="z.B. Bluthochdruck" required>
+            </div>
+            <a href="/patient/{{ id }}" class="btn btn-secondary">Abbrechen</a>
+            <button type="submit" class="btn btn-danger">Speichern</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

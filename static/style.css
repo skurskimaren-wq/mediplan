@@ -1,0 +1,44 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.table {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.btn {
+    border-radius: 8px;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+.badge {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border-radius: 8px;
+}

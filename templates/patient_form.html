@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-4">Neuen Patienten anlegen</h1>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Geburtsdatum</label>
+                <input type="date" name="geburtsdatum" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Allergien / Unverträglichkeiten</label>
+                <input type="text" name="allergien" class="form-control" placeholder="z.B. Penicillin">
+            </div>
+            <a href="/" class="btn btn-secondary">Abbrechen</a>
+            <button type="submit" class="btn btn-danger">Patient anlegen</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
