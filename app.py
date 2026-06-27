@@ -5,9 +5,12 @@ import qrcode
 import io
 import base64
 import functools
+from datetime import timedelta
 
 app = Flask(__name__)
 app.secret_key = 'mediplan-geheim-2026'
+app.config['SESSION_PERMANENT'] = False
+app.permanent_session_lifetime = timedelta(minutes=30)
 
 with app.app_context():
     init_db()
@@ -55,6 +58,7 @@ def login():
         nutzer = conn.execute('SELECT * FROM nutzer WHERE username = ?', (username,)).fetchone()
         conn.close()
         if nutzer and check_password_hash(nutzer['passwort'], passwort):
+            session.permanent = False
             session['nutzer_id'] = nutzer['id']
             session['username'] = nutzer['username']
             return redirect(url_for('index'))
@@ -138,3 +142,7 @@ def patient_qr(id):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+#cd "Weiterführende Programmierkenntnisse"
+#python app.py
