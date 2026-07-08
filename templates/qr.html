@@ -20,6 +20,9 @@
             {% if patient['allergien'] %}
             <p class="mb-0 mt-1"><span class="badge bg-warning text-dark">⚠️ Allergie: {{ patient['allergien'] }}</span></p>
             {% endif %}
+            {% if patient['notfallkontakt_name'] %}
+            <p class="mb-0 mt-1"><span class="badge bg-info">📞 {{ patient['notfallkontakt_name'] }}: {{ patient['notfallkontakt_telefon'] }}</span></p>
+            {% endif %}
         </div>
 
         <!-- QR Code -->
