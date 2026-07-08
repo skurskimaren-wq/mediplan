@@ -1,20 +1,31 @@
 # 🚑 MediPlan – Digitaler Medikamentenplan
 
-## Was ist MediPlan?
-MediPlan ist eine Web-Anwendung für den Rettungsdienst, die ein häufiges Problem löst: 
-Patienten wissen oft nicht welche Medikamente sie nehmen, Medipläne sind nicht aktuell 
-oder gar nicht vorhanden. Im Notfall kostet das wertvolle Zeit.
+> ❤️‍🩹 Ein aktueller, vollständiger Medikamentenplan kann Leben retten.
 
-Mit MediPlan kann jeder Patient seinen persönlichen Medikamentenplan digital pflegen. 
-Ein QR-Code zum Ausdrucken (z.B. am Kühlschrank) ermöglicht dem Rettungsdienst 
-im Notfall sofortigen Zugriff auf alle wichtigen Informationen.
+## Das Problem
+Medikamentenpläne sind im Notfall oft nicht aktuell, nicht auffindbar oder gar nicht 
+vorhanden. Patienten wissen häufig nicht welche Medikamente sie nehmen oder können 
+diese Information im Notfall nicht mitteilen — gerade ältere Menschen sind hier oft 
+auf Unterstützung angewiesen. Für den Rettungsdienst kostet das wertvolle Zeit.
+
+Ein weiteres Problem: Selbst wenn ein Mediplan vorhanden ist, muss er erst gefunden 
+werden. Liegt er bei jedem woanders, verliert der Rettungsdienst im Notfall kostbare 
+Sekunden beim Suchen.
+
+## Die Lösung
+Mit MediPlan können Patienten oder ihre Angehörigen den persönlichen Medikamentenplan 
+einfach digital pflegen. Ein QR-Code wird ausgedruckt und **fest am Kühlschrank** 
+befestigt — einem Ort den der Rettungsdienst standardmäßig als ersten Anlaufpunkt kennt. 
+Im Notfall einfach scannen und sofort alle wichtigen Informationen im Blick.
 
 ## Funktionen
 - 👤 Eigener Account pro Nutzer (Registrierung & Login)
 - ➕ Patienten anlegen mit Name, Geburtsdatum und Allergien
-- 💊 Medikamente mit Dosierung, Uhrzeit und Diagnose eintragen
-- 📱 QR-Code generieren und ausdrucken
-- 🗑️ Patienten und Medikamente löschen
+- ✏️ Patienten nachträglich bearbeiten
+- 💊 Medikamente mit Dosierung, Uhrzeit und Diagnose eintragen & löschen
+- 📞 Notfallkontakt hinterlegen
+- 🩺 Hausarzt mit Telefonnummer hinterlegen
+- 📱 QR-Code generieren und am Kühlschrank ausdrucken
 - 🔒 Jeder Nutzer sieht nur seine eigenen Daten
 
 ## Technologien
@@ -23,6 +34,7 @@ im Notfall sofortigen Zugriff auf alle wichtigen Informationen.
 - Jinja2 (Templates)
 - Bootstrap 5 (Design)
 - qrcode (QR-Code Generierung)
+- werkzeug (Passwort-Sicherheit)
 
 ## Installation
 1. Repository klonen
