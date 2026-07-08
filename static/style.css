@@ -1,57 +1,242 @@
-body {
-    background-color: #f8f9fa;
-    font-family: 'Segoe UI', sans-serif;
-}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MediPlan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
 
-.navbar {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
+        body {
+            background: #fde8e8 !important;
+            min-height: 100vh;
+        }
 
-.navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
+        /* SIDEBAR LAYOUT */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 240px;
+            background: linear-gradient(180deg, #c0392b 0%, #922b21 100%);
+            padding: 30px 20px;
+            z-index: 100;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+        }
 
-.card {
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    transition: transform 0.2s;
-}
+        .sidebar-brand {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
 
-.card:hover {
-    transform: translateY(-3px);
-}
+        .sidebar-subtitle {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.75rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-.table {
-    border-radius: 12px;
-    overflow: hidden;
-}
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
 
-.btn {
-    border-radius: 8px;
-}
+        .sidebar-nav a:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
 
-h1 {
-    font-weight: 700;
-}
+        .sidebar-nav a.active {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
 
-.badge {
-    font-size: 0.85rem;
-    padding: 6px 10px;
-    border-radius: 8px;
-}
-@media print {
-    body * {
-        visibility: hidden;
-    }
-    #drucken, #drucken * {
-        visibility: visible;
-    }
-    #drucken {
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-}
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .sidebar-user {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 12px 15px;
+            color: white;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-user a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .sidebar-user a:hover {
+            color: white;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 240px;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        /* CARDS */
+        .card {
+            border: none !important;
+            border-radius: 18px !important;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06) !important;
+            background: white !important;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(192,57,43,0.12) !important;
+        }
+
+        /* BUTTONS */
+        .btn {
+            border-radius: 12px !important;
+            font-weight: 600 !important;
+            padding: 9px 20px !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+            border: none !important;
+            box-shadow: 0 4px 15px rgba(231,76,60,0.3) !important;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 25px rgba(231,76,60,0.4) !important;
+        }
+
+        .btn-outline-danger {
+            border: 2px solid #e74c3c !important;
+            color: #e74c3c !important;
+        }
+
+        .btn-outline-danger:hover {
+            background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+            color: white !important;
+        }
+
+        .btn-secondary {
+            background: #f0f0f5 !important;
+            border: none !important;
+            color: #6e6e73 !important;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22) !important;
+            border: none !important;
+            color: white !important;
+        }
+
+        /* FORMS */
+        .form-control {
+            border-radius: 12px !important;
+            border: 2px solid #f0f0f5 !important;
+            padding: 11px 15px !important;
+            background: #fafafa !important;
+            transition: all 0.2s !important;
+        }
+
+        .form-control:focus {
+            border-color: #e74c3c !important;
+            box-shadow: 0 0 0 4px rgba(231,76,60,0.1) !important;
+            background: white !important;
+        }
+
+        .form-label {
+            font-weight: 600 !important;
+            font-size: 0.82rem !important;
+            color: #6e6e73 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.06em !important;
+        }
+
+        /* BADGES */
+        .badge {
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            padding: 5px 10px !important;
+        }
+
+        /* HEADINGS */
+        h1, h2, h3, h4, h5 {
+            font-weight: 700 !important;
+            letter-spacing: -0.02em !important;
+        }
+
+        /* ALERTS */
+        .alert {
+            border-radius: 14px !important;
+            border: none !important;
+        }
+
+        /* PRINT */
+        @media print {
+            .sidebar { display: none; }
+            .main-content { margin-left: 0; }
+            body * { visibility: hidden; }
+            #drucken, #drucken * { visibility: visible; }
+            #drucken { position: absolute; left: 0; top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+{% if session.username %}
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <a href="/" class="sidebar-brand">🚑 MediPlan</a>
+    <p class="sidebar-subtitle">Digitaler Medikamentenplan</p>
+
+    <div class="sidebar-nav">
+        <a href="/" class="active">🏠 Übersicht</a>
+        <a href="/patient/neu">➕ Neuer Patient</a>
+    </div>
+
+    <div class="sidebar-bottom">
+        <div class="sidebar-user">
+            <span>👤 {{ session.username }}</span>
+            <a href="/logout">Ausloggen</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- MAIN CONTENT -->
+<div class="{{ 'main-content' if session.username else 'container py-5' }}">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

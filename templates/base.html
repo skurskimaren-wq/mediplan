@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<nav class="navbar navbar-dark bg-danger mb-4">
+<nav class="navbar mb-4" style="background: white; border-bottom: 3px solid #e74c3c; box-shadow: 0 2px 15px rgba(231,76,60,0.1);">
     <div class="container">
-        <a class="navbar-brand" href="/">🚑 MediPlan</a>
+        <a class="navbar-brand fw-800" href="/" style="font-weight: 800; font-size: 1.3rem; color: #c0392b; letter-spacing: -0.5px;">🚑 MediPlan</a>
         {% if session.username %}
         <div class="d-flex align-items-center gap-3">
-            <span class="text-white opacity-75">👤 {{ session.username }}</span>
-            <a href="/logout" class="btn btn-outline-light btn-sm">Ausloggen</a>
+            <span style="color: #6e6e73;">👤 {{ session.username }}</span>
+            <a href="/logout" class="btn btn-outline-danger btn-sm">Ausloggen</a>
         </div>
         {% endif %}
     </div>
