@@ -6,6 +6,7 @@ import io
 import base64
 import functools
 from datetime import timedelta
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'mediplan-geheim-2026'
@@ -29,6 +30,14 @@ def index():
     conn = get_connection()
     patienten = conn.execute('SELECT * FROM patienten WHERE nutzer_id = ?', (session['nutzer_id'],)).fetchall()
     conn.close()
+
+    def format_datum(datum):
+        try:
+            return datetime.strptime(datum, '%Y-%m-%d').strftime('%d.%m.%Y')
+        except:
+            return datum
+
+    app.jinja_env.filters['datum'] = format_datum
     return render_template('index.html', patienten=patienten)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -157,6 +166,36 @@ def medikament_loeschen(id):
     conn.commit()
     conn.close()
     return redirect(url_for('patient_detail', id=patient_id))
+
+@app.route('/patient/<int:id>/bearbeiten', methods=['GET', 'POST'])
+@login_required
+def patient_bearbeiten(id):
+    conn = get_connection()
+    patient = conn.execute('SELECT * FROM patienten WHERE id = ? AND nutzer_id = ?',
+                           (id, session['nutzer_id'])).fetchone()
+    if not patient:
+        return redirect(url_for('index'))
+    if request.method == 'POST':
+        vorname = request.form['vorname']
+        nachname = request.form['nachname']
+        name = vorname + ' ' + nachname
+        geburtsdatum = request.form['geburtsdatum']
+        allergien = request.form['allergien']
+        notfallkontakt_name = request.form['notfallkontakt_name']
+        notfallkontakt_telefon = request.form['notfallkontakt_telefon']
+        hausarzt_name = request.form['hausarzt_name']
+        hausarzt_telefon = request.form['hausarzt_telefon']
+        conn.execute('''UPDATE patienten SET name=?, geburtsdatum=?, allergien=?,
+                     notfallkontakt_name=?, notfallkontakt_telefon=?,
+                     hausarzt_name=?, hausarzt_telefon=?
+                     WHERE id=? AND nutzer_id=?''',
+                     (name, geburtsdatum, allergien, notfallkontakt_name,
+                      notfallkontakt_telefon, hausarzt_name, hausarzt_telefon,
+                      id, session['nutzer_id']))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('patient_detail', id=id))
+    return render_template('patient_bearbeiten.html', patient=patient)
 
 
 if __name__ == '__main__':

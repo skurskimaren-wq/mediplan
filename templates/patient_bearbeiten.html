@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-4">Patient bearbeiten</h1>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Vorname</label>
+                <input type="text" name="vorname" class="form-control"
+                    value="{{ patient['name'].split(' ')[0] }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Nachname</label>
+                <input type="text" name="nachname" class="form-control"
+                    value="{{ patient['name'].split(' ')[1] if ' ' in patient['name'] else '' }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Geburtsdatum</label>
+                <input type="date" name="geburtsdatum" class="form-control"
+                    value="{{ patient['geburtsdatum'] }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Allergien / Unverträglichkeiten</label>
+                <input type="text" name="allergien" class="form-control"
+                    value="{{ patient['allergien'] or '' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Notfallkontakt Name</label>
+                <input type="text" name="notfallkontakt_name" class="form-control"
+                    value="{{ patient['notfallkontakt_name'] or '' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Notfallkontakt Telefon</label>
+                <input type="text" name="notfallkontakt_telefon" class="form-control"
+                    value="{{ patient['notfallkontakt_telefon'] or '' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Hausarzt Name</label>
+                <input type="text" name="hausarzt_name" class="form-control"
+                    value="{{ patient['hausarzt_name'] or '' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Hausarzt Telefon</label>
+                <input type="text" name="hausarzt_telefon" class="form-control"
+                    value="{{ patient['hausarzt_telefon'] or '' }}">
+            </div>
+            <a href="/patient/{{ patient['id'] }}" class="btn btn-secondary">Abbrechen</a>
+            <button type="submit" class="btn btn-danger">Speichern</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

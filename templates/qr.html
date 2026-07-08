@@ -16,7 +16,7 @@
         <!-- Patienteninfo -->
         <div class="mb-3 text-start bg-light rounded-3 p-3">
             <p class="mb-1"><strong>👤 Patient:</strong> {{ patient['name'] }}</p>
-            <p class="mb-0"><strong>📅 geb.:</strong> {{ patient['geburtsdatum'] }}</p>
+            <p class="mb-0"><strong>📅 geb.:</strong> {{ patient['geburtsdatum'] | datum }}</p>
             {% if patient['allergien'] %}
             <p class="mb-0 mt-1"><span class="badge bg-warning text-dark">⚠️ Allergie: {{ patient['allergien'] }}</span></p>
             {% endif %}

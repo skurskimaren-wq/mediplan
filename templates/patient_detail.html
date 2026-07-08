@@ -7,7 +7,7 @@
     <div class="row align-items-center">
         <div class="col-md-8">
             <h1 class="fw-bold mb-1">👤 {{ patient['name'] }}</h1>
-            <p class="mb-1 opacity-75">📅 geboren am {{ patient['geburtsdatum'] }}</p>
+            <p class="mb-1 opacity-75">📅 geboren am {{ patient['geburtsdatum'] | datum }}</p>
             {% if patient['allergien'] %}
             <div class="mt-2">
                 <span class="badge bg-warning text-dark fs-6">⚠️ Allergie: {{ patient['allergien'] }}</span>
@@ -26,6 +26,7 @@
         </div>
         <div class="col-md-4 text-end">
             <a href="/patient/{{ patient['id'] }}/qr" class="btn btn-light me-2">📱 QR-Code</a>
+            <a href="/patient/{{ patient['id'] }}/bearbeiten" class="btn btn-light me-2">✏️ Bearbeiten</a>
             <a href="/patient/{{ patient['id'] }}/medikament/neu" class="btn btn-warning">+ Medikament</a>
         </div>
     </div>
