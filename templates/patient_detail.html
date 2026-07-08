@@ -10,24 +10,24 @@
             <p class="mb-1 opacity-75">📅 geboren am {{ patient['geburtsdatum'] | datum }}</p>
             {% if patient['allergien'] %}
             <div class="mt-2">
-                <span class="badge bg-warning text-dark fs-6">⚠️ Allergie: {{ patient['allergien'] }}</span>
+                <span class="badge fs-6" style="background: rgba(255,255,255,0.25);">⚠️ Allergie: {{ patient['allergien'] }}</span>
             </div>
             {% endif %}
             {% if patient['notfallkontakt_name'] %}
             <div class="mt-2">
-                <span class="badge bg-info fs-6">📞 Notfallkontakt: {{ patient['notfallkontakt_name'] }} — {{ patient['notfallkontakt_telefon'] }}</span>
+                <span class="badge fs-6" style="background: rgba(255,255,255,0.25);">📞 Notfallkontakt: {{ patient['notfallkontakt_name'] }} — {{ patient['notfallkontakt_telefon'] }}</span>
             </div>
             {% endif %}
             {% if patient['hausarzt_name'] %}
             <div class="mt-2">
-                <span class="badge bg-success fs-6">🩺 Hausarzt: {{ patient['hausarzt_name'] }} — {{ patient['hausarzt_telefon'] }}</span>
+                <span class="badge fs-6" style="background: rgba(255,255,255,0.25);">🩺 Hausarzt: {{ patient['hausarzt_name'] }} — {{ patient['hausarzt_telefon'] }}</span>
             </div>
             {% endif %}
         </div>
-        <div class="col-md-4 text-end">
-            <a href="/patient/{{ patient['id'] }}/qr" class="btn btn-light me-2">📱 QR-Code</a>
-            <a href="/patient/{{ patient['id'] }}/bearbeiten" class="btn btn-light me-2">✏️ Bearbeiten</a>
-            <a href="/patient/{{ patient['id'] }}/medikament/neu" class="btn btn-warning">+ Medikament</a>
+        <div class="col-md-4 text-end d-flex flex-column gap-3 align-items-end">
+            <a href="/patient/{{ patient['id'] }}/qr" class="btn me-2" style="background: rgba(255,255,255,0.25); color: white;">📱 QR-Code</a>
+            <a href="/patient/{{ patient['id'] }}/bearbeiten" class="btn me-2" style="background: rgba(255,255,255,0.25); color: white;">✏️ Bearbeiten</a>
+            <a href="/patient/{{ patient['id'] }}/medikament/neu" class="btn" style="background: white; color: #c0392b; font-weight: 700;">+ Medikament</a>
         </div>
     </div>
 </div>
