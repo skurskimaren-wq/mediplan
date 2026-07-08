@@ -78,13 +78,16 @@ def patient_neu():
         nachname = request.form['nachname']
         notfallkontakt_name = request.form['notfallkontakt_name']
         notfallkontakt_telefon = request.form['notfallkontakt_telefon']
+        hausarzt_name = request.form['hausarzt_name']
+        hausarzt_telefon = request.form['hausarzt_telefon']
         name = vorname + ' ' + nachname
         geburtsdatum = request.form['geburtsdatum']
         allergien = request.form['allergien']
         conn = get_connection()
         conn.execute(
-            'INSERT INTO patienten (nutzer_id, name, geburtsdatum, allergien, notfallkontakt_name, notfallkontakt_telefon) VALUES (?, ?, ?, ?, ?, ?)',
-            (session['nutzer_id'], name, geburtsdatum, allergien, notfallkontakt_name, notfallkontakt_telefon))
+            'INSERT INTO patienten (nutzer_id, name, geburtsdatum, allergien, notfallkontakt_name, notfallkontakt_telefon, hausarzt_name, hausarzt_telefon) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            (session['nutzer_id'], name, geburtsdatum, allergien, notfallkontakt_name, notfallkontakt_telefon,
+             hausarzt_name, hausarzt_telefon))
         conn.commit()
         conn.close()
         return redirect(url_for('index'))

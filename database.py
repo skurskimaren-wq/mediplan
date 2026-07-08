@@ -23,6 +23,8 @@ def init_db():
             allergien TEXT,
             notfallkontakt_name TEXT,
             notfallkontakt_telefon TEXT,
+            hausarzt_name TEXT,
+            hausarzt_telefon TEXT,
             FOREIGN KEY (nutzer_id) REFERENCES nutzer(id)
         )
     ''')

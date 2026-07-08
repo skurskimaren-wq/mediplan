@@ -23,6 +23,9 @@
             {% if patient['notfallkontakt_name'] %}
             <p class="mb-0 mt-1"><span class="badge bg-info">📞 {{ patient['notfallkontakt_name'] }}: {{ patient['notfallkontakt_telefon'] }}</span></p>
             {% endif %}
+            {% if patient['hausarzt_name'] %}
+            <p class="mb-0 mt-1"><span class="badge bg-success">🩺 {{ patient['hausarzt_name'] }}: {{ patient['hausarzt_telefon'] }}</span></p>
+            {% endif %}
         </div>
 
         <!-- QR Code -->

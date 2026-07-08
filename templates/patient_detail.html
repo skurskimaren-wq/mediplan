@@ -18,6 +18,11 @@
                 <span class="badge bg-info fs-6">📞 Notfallkontakt: {{ patient['notfallkontakt_name'] }} — {{ patient['notfallkontakt_telefon'] }}</span>
             </div>
             {% endif %}
+            {% if patient['hausarzt_name'] %}
+            <div class="mt-2">
+                <span class="badge bg-success fs-6">🩺 Hausarzt: {{ patient['hausarzt_name'] }} — {{ patient['hausarzt_telefon'] }}</span>
+            </div>
+            {% endif %}
         </div>
         <div class="col-md-4 text-end">
             <a href="/patient/{{ patient['id'] }}/qr" class="btn btn-light me-2">📱 QR-Code</a>
