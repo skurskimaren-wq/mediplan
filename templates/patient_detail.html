@@ -13,6 +13,11 @@
                 <span class="badge bg-warning text-dark fs-6">⚠️ Allergie: {{ patient['allergien'] }}</span>
             </div>
             {% endif %}
+            {% if patient['notfallkontakt_name'] %}
+            <div class="mt-2">
+                <span class="badge bg-info fs-6">📞 Notfallkontakt: {{ patient['notfallkontakt_name'] }} — {{ patient['notfallkontakt_telefon'] }}</span>
+            </div>
+            {% endif %}
         </div>
         <div class="col-md-4 text-end">
             <a href="/patient/{{ patient['id'] }}/qr" class="btn btn-light me-2">📱 QR-Code</a>
@@ -48,6 +53,13 @@
                         <div class="mt-1">
                             <small class="text-muted">Indikation / Diagnose</small>
                             <p class="mb-0">🏥 {{ med['indikation'] }}</p>
+                            <form method="POST" action="/medikament/{{ med['id'] }}/loeschen" class="mt-2">
+                                <button type="submit" class="btn btn-outline-danger btn-sm"
+                                    onclick="return confirm('Medikament wirklich löschen?')">
+                                    🗑️ Löschen
+                                 </button>
+                            </form>
+
                         </div>
                     </div>
                 </div>

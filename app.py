@@ -76,12 +76,15 @@ def patient_neu():
     if request.method == 'POST':
         vorname = request.form['vorname']
         nachname = request.form['nachname']
+        notfallkontakt_name = request.form['notfallkontakt_name']
+        notfallkontakt_telefon = request.form['notfallkontakt_telefon']
         name = vorname + ' ' + nachname
         geburtsdatum = request.form['geburtsdatum']
         allergien = request.form['allergien']
         conn = get_connection()
-        conn.execute('INSERT INTO patienten (nutzer_id, name, geburtsdatum, allergien) VALUES (?, ?, ?, ?)',
-                     (session['nutzer_id'], name, geburtsdatum, allergien))
+        conn.execute(
+            'INSERT INTO patienten (nutzer_id, name, geburtsdatum, allergien, notfallkontakt_name, notfallkontakt_telefon) VALUES (?, ?, ?, ?, ?, ?)',
+            (session['nutzer_id'], name, geburtsdatum, allergien, notfallkontakt_name, notfallkontakt_telefon))
         conn.commit()
         conn.close()
         return redirect(url_for('index'))
@@ -139,6 +142,19 @@ def patient_qr(id):
     buffer.seek(0)
     img_base64 = base64.b64encode(buffer.getvalue()).decode()
     return render_template('qr.html', patient=patient, img_base64=img_base64)
+
+
+@app.route('/medikament/<int:id>/loeschen', methods=['POST'])
+@login_required
+def medikament_loeschen(id):
+    conn = get_connection()
+    medikament = conn.execute('SELECT * FROM medikamente WHERE id = ?', (id,)).fetchone()
+    patient_id = medikament['patient_id']
+    conn.execute('DELETE FROM medikamente WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('patient_detail', id=patient_id))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

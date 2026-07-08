@@ -21,6 +21,8 @@ def init_db():
             name TEXT NOT NULL,
             geburtsdatum TEXT NOT NULL,
             allergien TEXT,
+            notfallkontakt_name TEXT,
+            notfallkontakt_telefon TEXT,
             FOREIGN KEY (nutzer_id) REFERENCES nutzer(id)
         )
     ''')
