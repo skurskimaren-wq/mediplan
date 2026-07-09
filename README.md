@@ -28,19 +28,6 @@ Im Notfall einfach scannen und sofort alle wichtigen Informationen im Blick.
 - 📱 QR-Code generieren und am Kühlschrank ausdrucken
 - 🔒 Jeder Nutzer sieht nur seine eigenen Daten
 
-## Technologien
-- Python & Flask (Web-Framework)
-- SQLite (Datenbank)
-- Jinja2 (Templates)
-- Bootstrap 5 (Design)
-- qrcode (QR-Code Generierung)
-- werkzeug (Passwort-Sicherheit)
-
-## Installation
-1. Repository klonen
-2. Pakete installieren: `pip install flask qrcode[pil] werkzeug`
-3. App starten: `python app.py`
-4. Browser öffnen: `http://127.0.0.1:5000`
 
 ## Hintergrund
 Dieses Projekt entstand im Rahmen des Moduls *Weiterführende Programmierkenntnisse* 
